@@ -3,10 +3,9 @@ package compiler
 import (
 	"bytes"
 	"encoding/binary"
-	//"fmt"
+
 	"github.com/go-interpreter/wagon/disasm"
 	"github.com/go-interpreter/wagon/wasm"
-	//"github.com/go-interpreter/wagon/validate"
 	"github.com/go-interpreter/wagon/wasm/leb128"
 	"github.com/perlin-network/life/compiler/opcodes"
 	"github.com/perlin-network/life/utils"
@@ -150,7 +149,7 @@ func (m *Module) CompileForInterpreter(gp GasPolicy) (_retCode []InterpreterCode
 
 	for i, f := range m.Base.FunctionIndexSpace {
 		//fmt.Printf("Compiling function %d (%+v) with %d locals\n", i, f.Sig, len(f.Body.Locals))
-		d, err := disasm.Disassemble(f, m.Base)
+		d, err := disasm.NewDisassembly(f, m.Base)
 		if err != nil {
 			panic(err)
 		}
